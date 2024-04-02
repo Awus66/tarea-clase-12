@@ -1,0 +1,25 @@
+{
+  "name": "tarea-clase-12",
+  "version": "1.0.0",
+  "description": "Exchange Rates y Pokedex para la clase 12 de r/argentina-programa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Awus66/tarea-clase-12.git"
+  },
+  "author": "Awus66",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Awus66/tarea-clase-12/issues"
+  },
+  "homepage": "https://github.com/Awus66/tarea-clase-12#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "cypress": "^13.7.2"
+  }
+}
