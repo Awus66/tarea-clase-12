@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Exchange Rates</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='static/main.css'>
-    <link rel="stylesheet" type="text/css" media="screen" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Exchange Rates</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" media="screen" href="static/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../node_modules/bootstrap-icons/bootstrap-icons.svg" />
 </head>
-    <script src='src/index.js'></script>
+
+<body>
+	<header class="p-3 mb-3 border-bottom">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-content-between">
+				<a href="" class="mb-2 mb-lg-0 link-body-emphasis text-decoration-none justify-content-lg-start">
+					<img src="../node_modules\bootstrap-icons\icons\reddit.svg" alt="Reddit" width="32" height="32" />
+					<span class="fs-4 mx-2">Exchange Rates</span>
+				</a>
+
+				<a href="https://argentinaprograma.com/"
+					class="mb-2 mb-lg-1 link-body-emphasis text-decoration-none ml-auto">
+					<span class="fs-4 mx-2">r/argentina-programa</span>
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<h1 class="title m-4 text-center"> Foreign exchange references rates published by the European Central Bank
+			refreshes around 16:00 CET every working day.</h1>
+	</div>
+
+	<div class="container pb-3 mb-3 border-bottom">
+		<form>
+			<div class="row justify-content-center m-2">
+				<div class="col-lg-auto mb-3">
+					<label class="form-label me-2" for="symbol">Symbol:</label>
+				</div>
+				<div class="col-lg-2 mb-3">
+					<select class="form-select" id="symbol" required>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="row justify-content-center m-2">
+				<div class="col-lg-auto mb-3">
+					<label class="form-label me-2" for="amount">Amount:</label>
+				</div>
+				<div class="col-lg-2 mb-3">
+					<input class="form-control" id="amount" placeholder="Amount" type="text" value="1" required>
+				</div>
+			</div>
+
+			<div class="row justify-content-center m-2">
+				<div class="col-lg-auto mb-3">
+					<button type="button" class="btn btn-dark" id="submit-button">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<footer class="mb-5 small text-center text-muted">
+		Data provided by <a href="https://frankfurter.app/">Frankfurter</a>
+	</footer>
+
+	<script src="src/index.js"></script>
 </body>
+
 </html>
