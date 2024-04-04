@@ -5,8 +5,11 @@ const $amount = document.querySelector('#amount');
 const $startDate = document.querySelector('#start-date');
 const $endDate = document.querySelector('#end-date');
 
+//Loads symbols
 loadSymbols();
 const $symbol = document.querySelector('#symbol');
+
+//Sets max value of start and end dates to current time
 const currentTime = new Date().toISOString().split("T")[0];
 $startDate.max = currentTime;
 $endDate.max = currentTime;
@@ -23,6 +26,7 @@ function loadSymbols () {
             $newFromSymbol.innerText = symbol;
             $from.appendChild($newFromSymbol);
 
+            //Sets default value of "from" to EUR
             if (symbol === 'EUR'){
                 $newFromSymbol.selected = true;
             }
