@@ -7,6 +7,10 @@ const $endDate = document.querySelector('#end-date');
 
 loadSymbols();
 const $symbol = document.querySelector('#symbol');
+const currentTime = new Date().toISOString().split("T")[0];
+$startDate.max = currentTime;
+$endDate.max = currentTime;
+
 
 
 function loadSymbols () {
