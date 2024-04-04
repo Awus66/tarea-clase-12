@@ -30,3 +30,40 @@ function loadSymbols () {
         });
     });
 }
+function getFetch() {
+    let URL = `https://api.frankfurter.app/`;
+
+    if (!isEmpty($startDate)){
+        URL = URL + `${$startDate.value}..`;
+    }
+
+    if (!isEmpty($endDate)){
+        URL = URL + `${$endDate.value}`;
+    }
+
+    if (isEmpty($startDate) && isEmpty($endDate)){
+        URL = URL + `latest`;
+    }
+
+    URL = URL + `?from=${$from.value}`;
+
+    if (!isEmpty($to)){
+        URL = URL + `&to=${$to.value}`;
+    }
+
+    URL = URL + `&amount=${$amount.value}`;
+
+    // (Remember to validate that from and to can't be the same, otherwise it has to be validated here)
+
+    return URL;
+
+}
+
+function isEmpty(input) {
+    if(input.value.length === 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
