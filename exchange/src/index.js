@@ -7,7 +7,6 @@ const $endDate = document.querySelector('#end-date');
 
 //Loads symbols
 loadSymbols();
-const $symbol = document.querySelector('#symbol');
 
 //Sets max value of start and end dates to current time
 const currentTime = new Date().toISOString().split("T")[0];
