@@ -13,7 +13,7 @@ const currentTime = new Date().toISOString().split("T")[0];
 $startDate.max = currentTime;
 $endDate.max = currentTime;
 
-
+document.querySelector('#submit-button').onclick = getData;
 
 function loadSymbols () {
     fetch('https://api.frankfurter.app/currencies')
@@ -37,6 +37,66 @@ function loadSymbols () {
         });
     });
 }
+
+
+function getData() {
+    const $data = document.querySelector('#data');
+    fetch(getFetch())
+    .then(response => response.json())
+    .then(response => {
+        const base = `${response['base']}`;
+        const to = document.querySelector('#to').value;
+        const amount = `${response['amount']}`;
+        const startDate = `${response['start_date']}`;
+        const endDate = `${response['end_date']}`;
+
+        let dataText = `Exchange Rates for ${amount} ${base} `;
+
+        if (!isEmpty($to)){
+            dataText = dataText + `to ${to} `;
+        }
+
+        dataText = dataText + `on `
+
+        if (!isEmpty($startDate)){
+            dataText = dataText + `${startDate} - `;
+        }
+    
+        if (!isEmpty($endDate)){
+            dataText = dataText + `${$endDate.value}`;
+        }
+        else {
+            dataText = dataText + `${currentTime}`;
+        }
+        
+        $data.innerText = dataText;
+        $data.classList.add('fs-4', 'fw-bold');
+
+        const $ratesContainer = document.createElement('span');
+        $ratesContainer.id = 'rates';
+
+        Object.entries(response['rates']).forEach(([key, values]) =>{
+            const $newRate = document.createElement('li');
+            let ratesText;
+
+            if (Object.entries(values).length > 0){
+                ratesText = Object.entries(values).map(([currency, value]) => `\n${currency}: ${value}`).join('');
+            }
+            else{
+                ratesText = values;
+            }
+
+            $newRate.innerText = `${key}: ${ratesText}`;
+            $newRate.classList.add('m-4', 'fs-6', 'lh-sm', 'fw-light');
+            $ratesContainer.appendChild($newRate);
+        });
+
+        $data.appendChild($ratesContainer);
+        $data.style.display = '';
+    });
+}
+
+
 function getFetch() {
     let URL = `https://api.frankfurter.app/`;
 
