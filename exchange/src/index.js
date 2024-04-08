@@ -44,22 +44,16 @@ function getData() {
     fetch(getFetch())
     .then(response => response.json())
     .then(response => {
-        const base = `${response['base']}`;
-        const to = document.querySelector('#to').value;
-        const amount = `${response['amount']}`;
-        const startDate = `${response['start_date']}`;
-        const endDate = `${response['end_date']}`;
-
-        let dataText = `Exchange Rates for ${amount} ${base} `;
+        let dataText = `Exchange Rates for ${$amount.value} ${$from.value} `;
 
         if (!isEmpty($to)){
-            dataText = dataText + `to ${to} `;
+            dataText = dataText + `to ${$to.value} `;
         }
 
         dataText = dataText + `on `
 
         if (!isEmpty($startDate)){
-            dataText = dataText + `${startDate} - `;
+            dataText = dataText + `${$startDate.value} - `;
         }
     
         if (!isEmpty($endDate)){
