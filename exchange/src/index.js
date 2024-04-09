@@ -35,7 +35,8 @@ function loadSymbols () {
             $newToSymbol.innerText = symbol;
             $to.appendChild($newToSymbol);
         });
-    });
+    })
+    .catch(error => console.error("FAILED", error));
 }
 
 
@@ -99,7 +100,8 @@ function getData() {
 
         $data.appendChild($ratesContainer);
         $data.style.display = '';
-    });
+    })
+    .catch(error => console.error("FAILED", error));
 }
 
 
