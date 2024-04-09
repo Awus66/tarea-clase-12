@@ -149,8 +149,6 @@ function getFetch() {
 
     URL = URL + `&amount=${$amount.value}`;
 
-    // (Remember to validate that from and to can't be the same, otherwise it has to be validated here)
-
     return URL;
 
 }
