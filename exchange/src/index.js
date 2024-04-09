@@ -66,14 +66,18 @@ function getData() {
         dataText = dataText + `on `
 
         if (!isEmpty($startDate)){
-            dataText = dataText + `${$startDate.value} - `;
+            dataText = dataText + `${$startDate.value}`;
         }
     
         if (!isEmpty($endDate)){
-            dataText = dataText + `${$endDate.value}`;
+            dataText = dataText + ` - ${$endDate.value}`;
         }
         else {
             dataText = dataText + `${currentTime}`;
+        }
+
+        if ($startDate === $endDate){
+            dataText = dataText - ` - ${$endDate.value}`;
         }
         
         $data.innerText = dataText;
