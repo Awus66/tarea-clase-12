@@ -41,6 +41,18 @@ function loadSymbols () {
 
 function getData() {
     const $data = document.querySelector('#data');
+    cleanErrors();
+
+    if ( !($amount.value > 0 && /^[0-9]+$/.test($amount.value)) ){
+        createError($amount, '"Amount" must be a number greater than 0');
+    }
+    if ($from.value === $to.value){
+        $to.value = '';
+    }
+
+    if(document.querySelectorAll('.error').length > 0){
+        return;
+    }
     fetch(getFetch())
     .then(response => response.json())
     .then(response => {
@@ -88,6 +100,23 @@ function getData() {
         $data.appendChild($ratesContainer);
         $data.style.display = '';
     });
+}
+
+
+function cleanErrors(){
+    document.querySelectorAll('.error').forEach(error => {
+        error.classList.remove('error');
+    });
+    document.querySelector('#errors').innerHTML = '';
+}
+
+
+function createError(element, errorMessage){
+    element.classList.add('error');
+    const $errors = document.querySelector('#errors');
+    const $newItem = document.createElement('li');
+    $newItem.innerText = errorMessage;
+    $errors.appendChild($newItem);
 }
 
 
