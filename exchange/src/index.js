@@ -65,20 +65,31 @@ function getData() {
 
         dataText = dataText + `on `
 
+        let dataDate;
+
         if (!isEmpty($startDate)){
-            dataText = dataText + `${$startDate.value}`;
-        }
-    
-        if (!isEmpty($endDate)){
-            dataText = dataText + ` - ${$endDate.value}`;
+            dataDate = `${$startDate.value}`;
+            if (!isEmpty($endDate)){
+                dataDate = dataDate + ` - ${$endDate.value}`;
+
+                if ($startDate.value === $endDate.value){
+                    dataDate = `${$endDate.value}`;
+                }
+            }
+            else {
+                dataDate = dataDate + ` - ${currentTime}`;
+            }
         }
         else {
-            dataText = dataText + `${currentTime}`;
+            if (!isEmpty($endDate)){
+                dataDate = `${$endDate.value}`;
+            }
+            else {
+                dataDate = `${currentTime}`;
+            }
         }
 
-        if ($startDate === $endDate){
-            dataText = dataText - ` - ${$endDate.value}`;
-        }
+        dataText = dataText + dataDate;
         
         $data.innerText = dataText;
         $data.classList.add('fs-4', 'fw-bold');
