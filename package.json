@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/Awus66/tarea-clase-12#readme",
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3"
   },
   "devDependencies": {
     "cypress": "^13.7.2"
