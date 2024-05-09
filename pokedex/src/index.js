@@ -10,9 +10,9 @@ const $totalPages = document.querySelector('#total-pages');
 const $pokemons = document.querySelector('#pokemons');
 const $closeButton = document.querySelector('.close');
 let pokemonCount = 0;
+const pokemonsIDs = [];
 
-setPagesAmount();
-
+setIDs();
 
 $closeButton.onclick = function() {
     $modal.style.display = "none";
@@ -61,17 +61,35 @@ function previousPage(){
 }
 
 
+function setIDs() {
+    fetch(`${URL}/?limit=1302&offset=0`)
+    .then(response => response.json())
+    .then(response => {
+        pokemonCount = response.count;
+        for (let i = 0; i < pokemonCount; i++){
+            const pokemonURL = response.results[i].url
+            const parts = pokemonURL.split("/");
+            const pokemonID = Number(parts[parts.length - 2].replace(/\D/g, ""));
+
+            pokemonsIDs.push(pokemonID);
+        }
+        setPagesAmount();
+    });
+}
+
+
 function showPokemons(){
     clearPokemons();
 
-    const startingID = (($currentPage.value - 1) * POKEMONS_PER_PAGE) + 1;
-    const endingID = Math.min(startingID + POKEMONS_PER_PAGE, pokemonCount);
+    const startingPokemon = (($currentPage.value - 1) * POKEMONS_PER_PAGE) + 1;
+    const endingPokemon = Math.min(startingPokemon + POKEMONS_PER_PAGE, pokemonCount);
 
     const fetchPromises = [];
 
-    for(let i = startingID; i < endingID; i++){
+    for(let i = startingPokemon; i < endingPokemon; i++){
+        const pokemonID = pokemonsIDs[i - 1];
         fetchPromises.push(
-            fetch(`${URL}${i}`)
+            fetch(`${URL}${pokemonID}`)
             .then(response => response.json()));
         }
 
@@ -105,36 +123,12 @@ function showPokemons(){
 
 
 function setPagesAmount() {
-    fetch(URL)
-    .then(response => response.json())
-    .then(response => {
-        const fetchPromises = [];
-
-        for (let i = 1; i <= response["count"]; i++) {
-            fetchPromises.push(
-                fetch(`${URL}${i}`)
-                .then(response => response.json())
-                .then(pokemon => {
-                    if(pokemon){
-                        pokemonCount++;
-                        allPokemons.push(pokemon);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching Pokémon with ID:', i, error);
-                })
-            );
-        }
-
-        Promise.all(fetchPromises)
-        .then(() => {
-            const totalPages = Math.ceil(pokemonCount / POKEMONS_PER_PAGE);
-            $totalPages.value = totalPages;
-            document.querySelector('#loading-spinner').style.display = 'none';
-            showPokemons();
-        });
-    });
+    const totalPages = Math.ceil(pokemonCount / POKEMONS_PER_PAGE);
+    $totalPages.value = totalPages;
+    document.querySelector('#loading-spinner').style.display = 'none';
+    showPokemons();
 }
+
 
 function clearPokemons(){
     $pokemons.innerHTML = ''; 
