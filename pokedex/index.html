@@ -27,6 +27,15 @@
         </div>
     </div>
     <footer class="p-4 small text-center text-muted border-top bg-primary fixed-bottom">
+        <span style="color:white">Data provided by <a href="https://pokeapi.co/" style="color:gold">PokéAPI</a></span>
+        <div class="col m-3">
+            <button type="button" class="btn btn-warning btn-sm" id="previous-page">Previous</button>
+            <input class="m-1 border border-0 text-end page-input" id="current-page" style="width: 1.9em" value="1" />
+            <span style="color:white">/</span>
+            <input class="m-1 border border-0 page-input" id="total-pages"
+                style="width: 1.9em; background-color: white;" disabled />
+            <button type="button" class="btn btn-warning btn-sm" id="next-page">Next</button>
+        </div>
     </footer>
 
     <script src="src/index.js"></script>
