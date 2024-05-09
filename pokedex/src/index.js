@@ -24,6 +24,49 @@ window.onclick = function(event) {
     }
 }
 
+function showPokemons(){
+    clearPokemons();
+
+    const startingID = (($currentPage.value - 1) * POKEMONS_PER_PAGE) + 1;
+    const endingID = Math.min(startingID + POKEMONS_PER_PAGE, pokemonCount);
+
+    const fetchPromises = [];
+
+    for(let i = startingID; i < endingID; i++){
+        fetchPromises.push(
+            fetch(`${URL}${i}`)
+            .then(response => response.json()));
+        }
+
+        Promise.all(fetchPromises)
+        .then(pokemonData => {
+            pokemonData.forEach(pokemon => {
+                const name = pokemon["name"];
+                const sprite = pokemon["sprites"]["front_default"];
+
+                const newPokemon = document.createElement('div');
+                newPokemon.classList.add('pokemon');
+    
+                const pokemonName = document.createElement('p');
+                pokemonName.innerText = capitalize(name);
+    
+                const pokemonImage = document.createElement('img');
+                pokemonImage.src = sprite;
+    
+                newPokemon.appendChild(pokemonImage);
+                newPokemon.appendChild(pokemonName);
+
+                newPokemon.addEventListener("click", function() {
+                    showModal(pokemon);
+                });
+            
+    
+                $pokemons.appendChild(newPokemon);
+            });
+        });
+}
+
+
 function setPagesAmount() {
     fetch(URL)
     .then(response => response.json())
