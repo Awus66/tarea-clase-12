@@ -14,6 +14,16 @@ let pokemonCount = 0;
 setPagesAmount();
 
 
+$closeButton.onclick = function() {
+    $modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 function setPagesAmount() {
     fetch(URL)
     .then(response => response.json())
