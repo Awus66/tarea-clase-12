@@ -46,3 +46,8 @@ function setPagesAmount() {
     });
 }
 
+function clearPokemons(){
+    $pokemons.innerHTML = ''; 
+}
+
+
