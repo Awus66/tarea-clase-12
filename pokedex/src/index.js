@@ -24,6 +24,43 @@ window.onclick = function(event) {
     }
 }
 
+$previousPage.onclick = previousPage;
+$nextPage.onclick = nextPage;
+$currentPage.addEventListener('change', ()=> {
+    validateCurrentPage();
+    showPokemons();
+});
+
+
+function validateCurrentPage(){
+    const currentPage = Number($currentPage.value);
+    const totalPages = Number($totalPages.value);
+    if(currentPage < 1){
+        $currentPage.value = 1;
+    }
+    if(currentPage > totalPages){
+        $currentPage.value = totalPages;
+    }
+}
+
+
+function nextPage(){
+    if (Number($currentPage.value) < Number($totalPages.value)){
+        $currentPage.value = Number($currentPage.value) + 1;
+        showPokemons();
+    }
+}
+
+
+function previousPage(){
+    if ($currentPage.value > 1){
+        $currentPage.value = Number($currentPage.value) - 1;
+        showPokemons();
+    }
+
+}
+
+
 function showPokemons(){
     clearPokemons();
 
