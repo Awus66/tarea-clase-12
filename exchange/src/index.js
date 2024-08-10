@@ -1,3 +1,11 @@
+        if (this.startDate) {
+        if (this.endDate) {
+        if (!this.startDate && !this.endDate) {
+        else if (this.to) {
+            if (this.to){
+            if (this.startDate){
+                if (this.endDate){
+                if (this.endDate){
 const $submitButton = document.querySelector('#submit-button');
 const $from = document.querySelector('#from');
 const $to = document.querySelector('#to');
@@ -56,7 +64,6 @@ function getData() {
     .then(response => {
         let dataText = `Exchange Rates for ${$amount.value} ${$from.value} `;
 
-        if (!isEmpty($to)){
             dataText = dataText + `to ${$to.value} `;
         }
 
@@ -64,9 +71,7 @@ function getData() {
 
         let dataDate;
 
-        if (!isEmpty($startDate)){
             dataDate = `${$startDate.value}`;
-            if (!isEmpty($endDate)){
                 dataDate = dataDate + ` - ${$endDate.value}`;
 
                 if ($startDate.value === $endDate.value){
@@ -78,7 +83,6 @@ function getData() {
             }
         }
         else {
-            if (!isEmpty($endDate)){
                 dataDate = `${$endDate.value}`;
             }
             else {
@@ -137,21 +141,17 @@ function createError(element, errorMessage){
 function getFetch() {
     let URL = `https://api.frankfurter.app/`;
 
-    if (!isEmpty($startDate)){
         URL = URL + `${$startDate.value}..`;
     }
 
-    if (!isEmpty($endDate)){
         URL = URL + `${$endDate.value}`;
     }
 
-    if (isEmpty($startDate) && isEmpty($endDate)){
         URL = URL + `latest`;
     }
 
     URL = URL + `?from=${$from.value}`;
 
-    if (!isEmpty($to)){
         URL = URL + `&to=${$to.value}`;
     }
 
@@ -161,11 +161,3 @@ function getFetch() {
 
 }
 
-function isEmpty(input) {
-    if(input.value.length === 0){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
